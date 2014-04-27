@@ -11,40 +11,12 @@ Just copy and paste the codes below into your own functions.php file.
 require_once ('admin/index.php');
 
 
-
-add_action('init', 'theme_post_types');
-/**
-* Reqister Post-Types
-*
-* @return void
-*/
-function theme_post_types()
-{
-//example #1:
-$videos = new JesGS_PostType();
- 
-$videos
-->set_name('mytheme_videos')
-->set_singlename('Video')
-->set_pluralname('Videos')
-->set_arguments()
-->init();
- 
-// example #2:
-// init() method is called automatically
-$books = new JesGS_PostType(array(
-'name' => 'mytheme_books',
-'singlename' => 'Book',
-'pluralname' => 'Books',
-'arguments' => array(
-'supports' => array(
-'title',
-'editor',
-),
-'has_archive' => true,
-'rewrite' => array(
-'slug' => 'books',
-),
-),
-));
+function my_connection_types() {
+    p2p_register_connection_type( array(
+        'name' => 'posts_to_pages',
+        'from' => 'post',
+        'to' => 'page'
+    ) );
 }
+add_action( 'p2p_init', 'my_connection_types' );
+?>
